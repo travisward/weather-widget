@@ -11,6 +11,13 @@ You will have 5 business days from the date you receive this assignment to finis
 * A functioning local WordPress site
 * An API key for OpenWeather. You should have received this with your invitation email.
 
+## How to complete this assignment
+1. Fork this repo and clone that fork to your local WordPress plugins directory.
+2. Finish the plugin to fulfill the requirements.
+3. When complete, push up your work to your fork and send us the link!
+
+Please don't hesitate to reach out if you have any questions or need clarification on this assigment!
+
 ## The Problem
 One of the AMA chapters has requested a weather widget for their site. You have met with the chapter volunteers to
 gather all of the requirements:
