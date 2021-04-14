@@ -12,9 +12,9 @@ You will have 5 business days from the date you receive this assignment to finis
 * An API key for OpenWeather. You should have received this with your invitation email.
 
 ## How to complete this assignment
-1. Fork this repo and clone that fork to your local WordPress plugins directory.
+1. Clone this repo to your local WordPress plugins directory.
 2. Finish the plugin to fulfill the requirements.
-3. When complete, push up your work to your fork and send us the link!
+3. When complete, push up your work to your own Github repo and send us the link!
 
 Please don't hesitate to reach out if you have any questions or need clarification on this assigment!
 
