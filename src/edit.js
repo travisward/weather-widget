@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
 import { useBlockProps } from '@wordpress/block-editor';
+import { RichText } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -21,6 +22,8 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 import './editor.scss';
 
+import { withSelect } from '@wordpress/data';
+
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -29,10 +32,57 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit(props) {
+	const {
+			className,
+			attributes: { titleText, weatherText },
+			setAttributes,
+		} = props;
+
+	const onChangeTitle = ( value ) => {
+		setAttributes( { titleText: value } );
+	};
+		
+	var state = {
+		weather_data: [],
+		loading: true
+	}
+
+	wp.apiFetch({
+			path: 'ama-weather/v1/weather/',
+		}).then(data => {
+			
+			state = {
+				weather_data: data,
+				loading: false,
+			};
+
+			props.setAttributes( {
+				weatherText: data
+			} )
+
+		});
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __( 'Ama Weather – hello from the editor!', 'ama-weather' ) }
-		</p>
+		<div { ...useBlockProps() }>
+			<RichText
+					tagName="h2"
+					placeholder={ __(
+						'Title',
+						'ama-weather'
+					) }
+					value={ titleText }
+					onChange={ onChangeTitle }
+				/>
+			<RichText
+					tagName="p"
+					className="weather_text"
+					placeholder={ __(
+						'Weather',
+						'ama-weather'
+					) }
+					value={ weatherText }
+				/>
+		</div>
 	);
 }

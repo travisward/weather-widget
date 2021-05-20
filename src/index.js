@@ -4,7 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
 import { registerBlockType } from '@wordpress/blocks'
-
+import { RichText } from '@wordpress/block-editor';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * All files containing `style` keyword are bundled together. The code used
@@ -25,9 +25,35 @@ import Edit from './edit'
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
 registerBlockType('ama/weather', {
+	title: 'The AMA Weather Block',
+	category: 'common',
+	attributes: {
+		titleText: {
+			type: 'array',
+			selector: 'h2',
+		},
+		weatherText: {
+			type: 'array',
+			selector: '.weather_text',
+		}
+	},
 	/**
 	 * @see ./edit.js
 	 */
 	edit: Edit,
-	save: () => null,
+	save: ( props ) => {
+		const {
+			className,
+			attributes: { titleText, weatherText },
+		} = props;
+		return (
+			<div className={ className }>
+				<RichText.Content tagName="h2" value={ titleText } />
+				<RichText.Content tagName="p" className="weather_text" value={ weatherText }
+				/>
+			</div>
+		);
+	},
+
+
 })
